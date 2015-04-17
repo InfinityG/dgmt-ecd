@@ -130,7 +130,7 @@ gulp.task('livereload', function () {
 =====================================*/
 
 gulp.task('images', function () {
-  var stream = gulp.src('src/images/**/*');
+  var stream = gulp.src('./images/**/*');
   
   if (config.minify_images) {
     stream = stream.pipe(imagemin({
@@ -166,7 +166,7 @@ gulp.task('html', function() {
   if (config.cordova) {
     inject.push('<script src="cordova.js"></script>');
   }
-  gulp.src(['src/html/**/*.html'])
+  gulp.src(['./html/**/*.html'])
   .pipe(replace('<!-- inject:js -->', inject.join('\n    ')))
   .pipe(gulp.dest(config.dest));
 });
@@ -177,9 +177,9 @@ gulp.task('html', function() {
 ======================================================================*/
 
 gulp.task('less', function () {
-  gulp.src(['./src/less/app.less', './src/less/responsive.less'])
+  gulp.src(['./less/app.less', './less/responsive.less'])
     .pipe(less({
-      paths: [ path.resolve(__dirname, 'src/less'), path.resolve(__dirname, 'bower_components') ]
+      paths: [ path.resolve(__dirname, 'static/less'), path.resolve(__dirname, 'bower_components') ]
     }))
     .pipe(mobilizer('app.css', {
       'app.css': {
@@ -206,8 +206,8 @@ gulp.task('less', function () {
 gulp.task('js', function() {
     streamqueue({ objectMode: true },
       gulp.src(config.vendor.js),
-      gulp.src('./src/js/**/*.js').pipe(ngFilesort()),
-      gulp.src(['src/templates/**/*.html']).pipe(templateCache({ module: 'superCrow' }))
+      gulp.src('./js/**/*.js').pipe(ngFilesort()),
+      gulp.src(['./templates/**/*.html']).pipe(templateCache({ module: 'superCrow' }))
     )
     .pipe(sourcemaps.init())
     .pipe(concat('app.js'))
@@ -227,10 +227,10 @@ gulp.task('watch', function () {
   if (typeof config.server === 'object') {
     gulp.watch([config.dest + '/**/*'], ['livereload']);  
   }
-  gulp.watch(['./src/html/**/*'], ['html']);
-  gulp.watch(['./src/less/**/*'], ['less']);
-  gulp.watch(['./src/js/**/*', './src/templates/**/*', config.vendor.js], ['js']);
-  gulp.watch(['./src/images/**/*'], ['images']);
+  gulp.watch(['./html/**/*'], ['html']);
+  gulp.watch(['./less/**/*'], ['less']);
+  gulp.watch(['./js/**/*', './templates/**/*', config.vendor.js], ['js']);
+  gulp.watch(['./images/**/*'], ['images']);
 });
 
 
