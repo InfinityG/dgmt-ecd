@@ -1,0 +1,131 @@
+<section class="section container-fluid">
+    <h1 class="page-header">Configuration</h1>
+
+    <div class="scrollable">
+        <div class="scrollable-content">
+
+            <div class="section" ng-show="passwordValidated == false">
+                <div class="panel-group">
+
+                    <div class="panel panel-default">
+                        <div class="panel-heading">
+                            <div class="fa fa-unlock-alt fa-2x">
+                            </div>
+                            <span class="fa fa-2x pull-right">password required</span>
+
+
+                        </div>
+
+                        <div class="panel-body">
+
+                            <div class="input-group input-group-lg">
+                                <span class="input-group-addon"><div class="fa fa-key">password</div> </span>
+                                <input type="password" class="form-control" aria-label="Password"
+                                       placeholder="Password" ng-model="password" required="true"/>
+                            </div>
+                            <br/>
+
+                            <button type="button" class="btn btn-default btn-lg pull-right"
+                                    ng-show="password != null && password != ''" ng-click="validatePassword();">
+                                ok
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="section" ng-show="passwordValidated == true">
+                <div class="panel-group" ui-state='myAccordion' ui-default='1'>
+
+                    <div class="panel panel-default">
+
+                        <div class="panel-heading" ui-set="{'myAccordion': 1}">
+                            <div class="fa fa-unlock-alt fa-2x">
+                            </div>
+                            <span class="fa fa-2x pull-right">your signing keys</span>
+
+
+                        </div>
+                        <div ui-if="myAccordion == 1" ui-scope-context='1'>
+                            <div class="panel-body">
+
+                                <div class="input-group input-group-lg">
+                                    <span class="input-group-addon"><div class="fa fa-key">public</div> </span>
+                                    <input type="text" class="form-control" aria-label="Address"
+                                           placeholder="Address" ng-model="currentKeyPair.pk" disabled/>
+                                </div>
+                                <br/>
+
+                                <div class="input-group input-group-lg">
+                                    <span class="input-group-addon"><div class="fa fa-key">secret</div> </span>
+                                    <input type="text" class="form-control" aria-label="Secret"
+                                           placeholder="Secret" ng-model="currentKeyPair.sk" disabled/>
+
+                                </div>
+                                <br/>
+                                <button type="button" class="btn btn-default btn-lg pull-right"
+                                        ng-click="regenerateKeyPair();">regenerate
+                                </button>
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                    <div class="panel panel-default">
+
+                        <div class="panel-heading" ui-set="{'myAccordion': 2}">
+                            <div class="fa fa-credit-card fa-2x">
+                            </div>
+                            <span class="fa fa-2x pull-right">your wallet</span>
+
+
+                        </div>
+                        <div ui-if="myAccordion == 2" ui-scope-context='2'>
+                            <form name="walletForm" novalidate>
+                                <div class="panel-body">
+                                    <div class="section">Your Ripple wallet details</div>
+
+                                    <div class="input-group input-group-lg">
+                                        <span class="input-group-addon"><div class="fa fa-key">address</div> </span>
+                                        <input type="text" ripple-address name="address" class="form-control"
+                                               aria-label="Address"
+                                               placeholder="Address" ng-model="currentWallet.address" required/>
+                                     <span class="input-group-addon"
+                                           ng-show="walletForm.address.$dirty && walletForm.address.$invalid">
+                                        <div class="fa fa-exclamation-triangle"></div>
+                                    </span>
+                                    </div>
+                                    <br/>
+
+                                    <div class="input-group input-group-lg">
+                                        <span class="input-group-addon"><div class="fa fa-key">secret</div> </span>
+                                        <input type="text" ripple-secret name="secret" class="form-control"
+                                               aria-label="Secret"
+                                               placeholder="Secret" ng-model="currentWallet.secret" required/>
+                                     <span class="input-group-addon"
+                                           ng-show="walletForm.secret.$dirty && walletForm.secret.$invalid">
+                                        <div class="fa fa-exclamation-triangle"></div>
+                                    </span>
+
+                                    </div>
+                                    <br/>
+                                    <button type="button" class="btn btn-default btn-lg pull-right"
+                                            ng-click="saveWallet();"
+                                            ng-hide="walletForm.address.$invalid ||
+                                        currentWallet.address == '' ||
+                                        walletForm.secret.$invalid ||
+                                        currentWallet.secret == ''">save
+                                    </button>
+                                </div>
+                            </form>
+                        </div>
+
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+    <modal redirect='false'></modal>
+</section>

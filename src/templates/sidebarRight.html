@@ -1,0 +1,94 @@
+<div class="scrollable">
+
+    <div class="scrollable-content">
+        <div class="section">
+
+            <!--<div class="panel panel-default" ng-show="" ui-turn-off='uiSidebarRight'>-->
+
+                <!--<div class="panel-heading">-->
+                    <!--<div class="fa fa-question-circle fa-2x">-->
+                    <!--</div>-->
+                    <!--<span class="fa fa-2x pull-right">additional info</span>-->
+                <!--</div>-->
+                <!--<div class="panel-body">-->
+                    <!--<div class="responsive-video">-->
+                        <!--<iframe src="https://player.vimeo.com/video/15136000?color=f5f5f5&title=0&byline=0&portrait=0"-->
+                                <!--width="500" height="281" frameborder="0" webkitallowfullscreen mozallowfullscreen-->
+                                <!--allowfullscreen></iframe>-->
+                        <!--<p><a href="https://vimeo.com/15136000">Sugata Mitra: The child-driven education</a> from <a-->
+                                <!--href="https://vimeo.com/bcdschool">Beaver Country Day School</a> on <a-->
+                                <!--href="https://vimeo.com">Vimeo</a>.</p>-->
+                    <!--</div>-->
+                <!--</div>-->
+            <!--</div>-->
+
+            <div class="panel panel-default">
+
+                <div class="panel-heading" ui-turn-off='uiSidebarRight'>
+                    <div class="fa fa-chevron-right fa-2x">
+                    </div>
+                    <span class="fa fa-2x pull-right">details</span>
+                </div>
+                <div class="panel-body">
+                    <form name="registrationForm">
+
+
+                            <div class="input-group input-group-lg">
+                                        <span class="input-group-addon dropdown-toggle" ui-turn-on='genderDropdown'>
+                                            <i class="fa fa-ellipsis-v"></i>
+                                        </span>
+                                <input type="text" class="form-control" placeholder="Select child gender"
+                                       aria-label="Role" name="gender" required="true"
+                                       ng-model="gender"/>
+
+                            <ul class="dropdown-menu"
+                                ui-outer-click="Ui.turnOff('genderDropdown')"
+                                ui-outer-click-if="Ui.active('genderDropdown')"
+                                role="menu"
+                                ui-show="genderDropdown"
+                                ui-state="genderDropdown"
+                                ui-turn-off="genderDropdown">
+
+                                <li><a>male</a></li>
+                                <li><a>female</a></li>
+                            </ul>
+                            </div>
+                        <br/>
+
+                        <div class="input-group input-group-lg">
+                            <span class="input-group-addon fa fa-user"></span>
+                            <input type="text" class="form-control" name="careGiverName" aria-label="Name"
+                                   placeholder="Caregiver name" ng-model="careGiverName"
+                                   ng-minlength="3" ng-maxlength="100" required="true"/>
+                        </div>
+                        <br/>
+
+                        <div class="input-group input-group-lg">
+                            <span class="input-group-addon fa fa-user"></span>
+                            <input type="text" class="form-control" aria-label="careGiverAddress" name="careGiverAddress"
+                                   placeholder="Caregiver address" ng-model="careGiverAddress" ng-minlength="3"
+                                   ng-maxlength="200"
+                                   required="true"/>
+
+                        </div>
+
+                        <br/>
+
+                        <div class="input-group input-group-lg">
+                            <span class="input-group-addon fa fa-envelope"></span>
+                            <input type="email" class="form-control" aria-label="Email" name="favouriteColour"
+                                   placeholder="Favourite colour" ng-model="favouriteColour" required="true"/>
+
+                        </div>
+                    </form>
+                </div>
+            </div>
+            <!--</div>-->
+            <!--<div class="responsive-video">-->
+            <!--<iframe width="560" height="315" src="https://www.youtube.com/embed/O_x4OLsfReQ?list=PLvzOwE5lWqhQ8D0m_371INljdki3RcVRb" frameborder="0" allowfullscreen></iframe>-->
+            <!--</div>-->
+            <!--<br/>-->
+
+        </div>
+    </div>
+</div>

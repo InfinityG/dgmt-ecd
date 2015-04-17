@@ -1,0 +1,302 @@
+<section class="section container-fluid">
+    <!--<h1 class="page-header">Steps</h1>-->
+
+    <div class="scrollable">
+        <div class="scrollable-content" ng-model="newContract">
+            <div class="section">
+                <h3><span ng-show="currentContract.id != null"> sent contract</span>
+                    <span ng-show="currentContract.external_id == 0">
+                        <span ng-show="contractType == 'facilitation'">new playgroup agreement</span>
+                        <span ng-show="contractType == 'registration'">new registration agreement</span>
+                        <span ng-show="contractType == 'enrolment'">new enrolment agreement</span>
+                    </span>
+                    <span ng-show="(currentContract.external_id > 1) && (currentContract.id == null)"> saved contract</span>
+                </h3>
+
+                <form name="contractForm" novalidate>
+                    <div class="panel-group" ui-state='myAccordion' ui-default='1'>
+
+                        <!-- CONTRACT NAME AND DESCRIPTION -->
+                        <div class="panel panel-default">
+
+                            <div class="panel-heading justified" ui-set="{'myAccordion': 1}">
+                                <span class="fa fa-pencil fa-2x"></span>
+                                <span class="fa fa-2x text-center">title</span>
+                                <span class="fa fa-chevron-left fa-2x text-right" ui-toggle="uiSidebarRight"></span>
+                            </div>
+
+                            <div ui-if="myAccordion == 1" ui-scope-context='1'>
+                                <div class="panel-body">
+                                    <div class="input-group input-group-lg">
+                                        <span class="input-group-addon fa fa-pencil"></span>
+                                        <input type="text" class="form-control" name="name" aria-label="Name"
+                                               placeholder="Name" ng-model="currentContract.name"
+                                               ng-minlength=3 ng-maxlength=100 required="true"
+                                               ng-disabled="currentContract.id != null"/>
+                                         <span class="input-group-addon"
+                                               ng-show="contractForm.name.$dirty && contractForm.name.$invalid">
+                                            <div class="fa fa-exclamation-triangle"></div>
+                                        </span>
+
+                                    </div>
+                                    <br/>
+
+                                    <div class="input-group input-group-lg">
+                                        <span class="input-group-addon fa fa-pencil"></span>
+                                        <input type="text" class="form-control" name="description"
+                                               aria-label="Description"
+                                               placeholder="Description"
+                                               ng-model="currentContract.description"
+                                               ng-minlength=3 ng-maxlength=200 required="true"
+                                               ng-disabled="currentContract.id != null"/>
+                                         <span class="input-group-addon"
+                                               ng-show="contractForm.description.$dirty && contractForm.description.$invalid">
+                                            <div class="fa fa-exclamation-triangle"></div>
+                                          </span>
+                                    </div>
+                                    <br/>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- PAY -->
+                        <div class="panel panel-default">
+
+                            <div class="panel-heading justified" ui-set="{'myAccordion': 2}">
+                                <span class="fa fa-money fa-2x"></span>
+                                <span class="fa fa-2x text-center">transfer value</span>
+                                <span class="fa fa-chevron-left fa-2x text-right" ui-toggle="uiSidebarRight"></span>
+                            </div>
+
+                            <div ui-if="myAccordion == 2" ui-scope-context='2'>
+                                <div class="panel-body">
+                                    <div class="input-group input-group-lg">
+                                        <span class="input-group-addon fa">credits</span>
+                                        <input type="text" class="form-control" aria-label="Amount" integer
+                                               name="amount" required="true"
+                                               ng-model="currentPaymentAmount.value"
+                                               ng-disabled="currentContract.id != null">
+                                        <span class="input-group-addon">.00</span>
+                                         <span class="input-group-addon"
+                                               ng-show="contractForm.amount.$dirty && contractForm.amount.$invalid">
+                                        <div class="fa fa-exclamation-triangle"></div>
+                                    </span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- WHO -->
+                        <div class="panel panel-default">
+
+
+                            <div class="panel-heading justified" ui-set="{'myAccordion': 3}">
+                                <span class="fa fa-user fa-2x"></span>
+                                <span class="fa fa-2x text-center">between</span>
+                                <span class="fa fa-chevron-left fa-2x text-right" ui-toggle="uiSidebarRight"></span>
+                            </div>
+
+                            <div ui-if="myAccordion == 3" ui-scope-context='3'>
+                                <div class="panel-body">
+                                    <div class="btn-group btn-group-lg">
+                                        <div class="input-group input-group-lg">
+                                        <!--<span class="input-group-addon dropdown-toggle" ui-turn-on='contactDropdown'>-->
+                                            <!--<i class="fa fa-ellipsis-v"></i>-->
+                                        <!--</span>-->
+                                            <!--<input type="text" class="form-control" placeholder="Select a group"-->
+                                                   <!--aria-label="Contact" name="receiver"-->
+                                                   <!--ng-model="currentContactGroup" required="true" ng-disabled="true"/>-->
+                                             <!--<span class="input-group-addon"-->
+                                                   <!--ng-show="contractForm.receiver.$dirty && contractForm.receiver.$invalid">-->
+                                        <!--<div class="fa fa-exclamation-triangle"></div>-->
+                                    <!--</span>-->
+                                            <div class="input-group input-group-lg">
+                                                <span ng-show="contractType == 'facilitation'">Me and all my playgroup facilitators</span>
+                                                <span ng-show="contractType == 'registration'">Me and all my playgroup facilitators</span>
+                                                <span ng-show="contractType == 'enrolment'">Me and all my playgroup facilitators</span>
+                                            </div>
+                                        </div>
+
+                                        <!--<ul class="dropdown-menu"-->
+                                            <!--ui-outer-click="Ui.turnOff('contactDropdown')"-->
+                                            <!--ui-outer-click-if="Ui.active('contactDropdown')"-->
+                                            <!--role="menu"-->
+                                            <!--ui-show="contactDropdown"-->
+                                            <!--ui-state="contactDropdown"-->
+                                            <!--ui-turn-off="contactDropdown">-->
+
+                                            <!--<li ng-repeat="contactGroup in contactGroups"-->
+                                                <!--ng-if="contactGroup.role != 'system'"-->
+                                                <!--ng-click="groupSelected(contactGroup);">-->
+                                                <!--<a>-->
+                                                    <!--<div ng-class="(contactGroup.role == 'leaders') ? 'fa fa-users fa-list-icon' :-->
+                                                <!--(contactGroup.role == 'facilitators') ? 'fa fa-child fa-list-icon' : 'fa fa-list-icon fa-user'"></div>-->
+                                                    <!--&nbsp; {{contactGroup}}-->
+
+                                                <!--</a>-->
+                                            <!--</li>-->
+
+                                        <!--</ul>-->
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+
+                        <!-- FOR -->
+                        <div class="panel panel-default">
+
+                            <div class="panel-heading justified" ui-set="{'myAccordion': 4}">
+                                <span class="fa fa-question fa-2x"></span>
+                                <span class="fa fa-2x text-center">for</span>
+                                <span class="fa fa-chevron-left fa-2x text-right" ui-toggle="uiSidebarRight"></span>
+                            </div>
+
+                            <div ui-if="myAccordion == 4" ui-scope-context='4'>
+                                <div class="panel-body">
+                                    <div class="btn-group btn-group-lg">
+
+                                        <span ng-show="contractType == 'facilitation'">Setting up a playgroup for this number of children:</span>
+                                        <span ng-show="contractType == 'registration'">Completing new child registrations</span>
+                                        <span ng-show="contractType == 'enrolment'">Enrolling children with a playgroup</span>
+
+                                        <div class="input-group input-group-lg">
+                                            <span class="input-group-addon dropdown-toggle" ui-turn-on='qtyDropdown'>
+                                                <i class="fa fa-ellipsis-v"></i>
+                                            </span>
+
+                                            <input type="text" class="form-control" placeholder="How many?"
+                                                aria-label="Quantity" name="signatureQuantity"
+                                                ng-model="signatureQuantity" required="true" ng-disabled="true"/>
+
+                                            <span class="input-group-addon"
+                                                  ng-show="contractForm.receiver.$dirty && contractForm.receiver.$invalid">
+                                                <div class="fa fa-exclamation-triangle"></div>
+                                            </span>
+
+                                            <ul class="dropdown-menu"
+                                                ui-outer-click="Ui.turnOff('qtyDropdown')"
+                                                ui-outer-click-if="Ui.active('qtyDropdown')"
+                                                role="menu"
+                                                ui-show="qtyDropdown"
+                                                ui-state="qtyDropdown"
+                                                ui-turn-off="qtyDropdown">
+
+                                                    <li ng-repeat="i in [1,2,3,4,5,6,7,8,9,10] track by $index">
+                                                        <a ng-click="signatureQuantityChanged($index + 1);">{{$index + 1}}</a>
+                                                    </li>
+                                            </ul>
+
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- IF -->
+                        <div class="panel panel-default">
+
+                            <div class="panel-heading justified" ui-set="{'myAccordion': 5}">
+                                <span class="fa fa-key fa-2x"></span>
+                                <span class="fa fa-2x text-center">if</span>
+                                <span class="fa fa-chevron-left fa-2x text-right" ui-toggle="uiSidebarRight"></span>
+                            </div>
+
+                            <div ui-if="myAccordion == 5" ui-scope-context='5'>
+                                <div class="panel-body">
+                                    <div class="input-group input-group-lg">
+                                        <span ng-show="contractType == 'facilitation'">
+                                            A caregiver brings a child to playgroup and presents an SMS PIN code to the facilitator
+                                        </span>
+                                        <span ng-show="contractType == 'registration'">
+                                            A valid SMS response is received from the caregiver of a newly registered child
+                                        </span>
+                                        <span ng-show="contractType == 'enrolment'">
+                                            A facilitator enrols a caregiver/child with a playgroup and the caregiver confirms this by presentation of an SMS PIN code
+                                        </span>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+
+                        <!-- WHEN -->
+                        <div class="panel panel-default">
+
+                            <div class="panel-heading justified" ui-set="{'myAccordion': 6}">
+                                <span class="fa fa-clock-o fa-2x"></span>
+                                <span class="fa fa-2x text-center">expiry date</span>
+                                <span class="fa fa-chevron-left fa-2x text-right" ui-toggle="uiSidebarRight"></span>
+                            </div>
+
+                            <div ui-if="myAccordion == 6" ui-scope-context='6'>
+                                <div class="panel-body">
+                                    <!--<h3>starting:</h3>-->
+                                    <!--<div class="input-group input-group-lg">-->
+                                        <!--<span class="input-group-addon"><div class="fa fa-pencil"></div> </span>-->
+                                        <!--<input type="text" name="starting" class="form-control"-->
+                                               <!--aria-label="Description"-->
+                                               <!--placeholder="DD/MM/YYYY" date-->
+                                               <!--ng-model="currentContract.expires"-->
+                                               <!--ng-disabled="currentContract.id != null"/>-->
+                                        <!--<span class="input-group-addon" ng-show="contractForm.expiry.$invalid">-->
+                                            <!--<div class="fa fa-exclamation-triangle"></div>-->
+                                        <!--</span>-->
+                                    <!--</div>-->
+                                    <!--<br/>-->
+
+                                    <!--<h3>every:</h3>-->
+                                    <!--<div class="input-group input-group-lg">-->
+                                        <!--<span>Monday<ui-switch ng-model="daysOfWeek.monday"></ui-switch></span>-->
+                                        <!--<span>Tuesday<ui-switch ng-model="daysOfWeek.tuesday"></ui-switch></span>-->
+                                        <!--<span>Wednesday<ui-switch ng-model="daysOfWeek.wednesday"></ui-switch></span>-->
+                                        <!--<span>Thursday<ui-switch ng-model="daysOfWeek.thursday"></ui-switch></span>-->
+                                        <!--<span>Friday<ui-switch ng-model="daysOfWeek.friday"></ui-switch></span>-->
+                                    <!--</div>-->
+                                    <!--<br/>-->
+
+                                    <!--<h3>until:</h3>-->
+                                    <div class="input-group input-group-lg">
+                                        <span class="input-group-addon"><div class="fa fa-pencil"></div> </span>
+                                        <input type="text" name="expiry" class="form-control"
+                                               aria-label="Description"
+                                               placeholder="DD/MM/YYYY" date
+                                               ng-model="currentContract.expires"
+                                               ng-disabled="currentContract.id != null"/>
+                                        <span class="input-group-addon" ng-show="contractForm.expiry.$invalid">
+                                            <div class="fa fa-exclamation-triangle"></div>
+                                        </span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+
+            <!--<div class="section">-->
+            <div class="navbar navbar-app"
+                 ng-hide="currentContract.id != null ||
+                         contractForm.name.$invalid ||
+                         currentContract.name == '' ||
+                         contractForm.description.$invalid ||
+                         currentContract.description == '' ||
+                         contractForm.amount.$invalid ||
+                         contractForm.expiry.$invalid ||
+                         currentContract.expires == ''">
+                <!-- ... -->
+
+                <div class="btn-group btn-group-lg justified nav-tabs">
+                    <a class="btn" ng-click="deleteContract(currentContract);">Delete</a>
+                    <a class="btn" ng-click="saveContract(currentContract);">Save</a>
+                    <a class="btn" ng-click="sendContract(currentContract);">Send</a>
+                </div>
+            </div>
+            <!--</div>-->
+        </div>
+    </div>
+
+    <modal redirect='true'></modal>
+
+</section>
+

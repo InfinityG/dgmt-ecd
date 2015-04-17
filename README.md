@@ -1,2 +1,2 @@
-# dgmt-ecd
-ECD franchise management prototype
+# supercrow
+Web application front-end based on MobileAngularUI

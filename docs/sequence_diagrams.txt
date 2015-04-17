@@ -1,0 +1,37 @@
+title Login sequence
+
+User->Web App:open
+Web App->Web App:check SessionStorage \nfor API token
+Web App->User:if no token, present \nlogin/register screen
+User->Web App:enter login details
+Web App->API:POST login credentials
+API->API:validate credentials, \ngenerate new token
+API->Web App:response with token
+Web App->Web App:store token \nin SessionStorage
+Web App->User:present default page
+
+
+title Submit contract sequence
+
+User->Web App:initiate contract submission
+Web App->User:prompt user to re-enter password
+User->Web App:password entered
+Web App->Web App:use password to \ndecrypt locally stored \nwallet secret
+Web App->Web App:generate 2x ss_key \nusing decrypted secret; \nset 1 ss_key on contract, \nadd the other to email subject
+Web App->API:POST contract to API
+API->API:save contract
+API->Web App:OK
+Web App->Web App:initiate email to oracle
+Web App->User:OK
+
+title Register User sequence
+
+User->Web App:initiate registration
+Web App->User:present registration page
+User->Web App:registration details entered; \nusername, password, email, \nwallet details
+Web App->Web App:use password to \nencrypt wallet secret; \nsave to LocalStorage
+Web App->Web App: generate signing key-pair; \nsave to LocalStorage
+Web App->API:POST registration to API
+API->API:save credentials
+API->Web App:OK
+Web App->User:present default page
